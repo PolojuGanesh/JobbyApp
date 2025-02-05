@@ -1,0 +1,125 @@
+.main-container {
+  background-color: #000000;
+  height: 100vh;
+  background-size: cover;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.form-container {
+  background-color: #272727;
+  padding-top: 3%;
+  padding-bottom: 3%;
+  padding-left: 2%;
+  padding-right: 2%;
+  border-radius: 7px;
+  width: 45%;
+}
+
+@media screen and (max-width: 767px) {
+  .form-container {
+    width: 70%;
+  }
+}
+
+.logo-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.app-logo {
+  height: 38px;
+}
+
+.username-container {
+  margin-top: 13%;
+}
+
+.username-label {
+  font-family: 'Roboto';
+  color: #ffffff;
+  font-weight: 500;
+  font-size: 13px;
+}
+
+.username-input {
+  outline: none;
+  background-color: transparent;
+  border: 1px solid #7e858e;
+  font-family: 'Roboto';
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
+  border-radius: 2px;
+  color: #cbd5e1;
+  margin-top: 2%;
+  width: 100%;
+}
+
+.password-container {
+  margin-top: 4%;
+}
+
+.password-label {
+  font-family: 'Roboto';
+  color: #ffffff;
+  font-weight: 500;
+  font-size: 13px;
+}
+
+@media screen and (max-width: 767px) {
+  .username-label {
+    font-size: 10px;
+  }
+
+  .password-label {
+    font-size: 10px;
+  }
+}
+
+.password-input {
+  outline: none;
+  background-color: transparent;
+  border: 1px solid #7e858e;
+  font-family: 'Roboto';
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
+  border-radius: 2px;
+  color: #cbd5e1;
+  margin-top: 2%;
+  width: 100%;
+}
+
+.login-button-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-top: 8%;
+}
+
+.login-button {
+  outline: none;
+  border-width: 0px;
+  background-color: #6366f1;
+  color: white;
+  font-family: 'Roboto';
+  padding-top: 2%;
+  padding-bottom: 2%;
+  font-weight: bold;
+  font-size: 12px;
+  width: 100%;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.error-msg {
+  color: #ff0b37;
+  font-family: 'Roboto';
+  font-size: 12px;
+}

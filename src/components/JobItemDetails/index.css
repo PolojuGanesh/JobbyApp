@@ -1,0 +1,37 @@
+.selected-job-details-container {
+  background-color: #000000;
+  background-size: cover;
+  padding-left: 5%;
+  padding-right: 5%;
+  padding-top: 2%;
+  padding-bottom: 2%;
+}
+
+.loader-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.failure-view-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.failure-image {
+}
+
+.failure-view-heading {
+  color: white;
+  font-family: 'Roboto';
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.failure-view-para {
+  color: white;
+  font-family: 'Roboto';
+  font-size: 11px;
+}

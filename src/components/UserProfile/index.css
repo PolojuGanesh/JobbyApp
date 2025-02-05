@@ -1,0 +1,72 @@
+.user-profile-container {
+  background-image: url('https://assets.ccbp.in/frontend/react-js/profile-bg.png');
+  background-size: cover;
+  padding-left: 5%;
+  padding-right: 5%;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border-bottom-left-radius: 17px;
+  border-bottom-right-radius: 17px;
+}
+
+.user-name {
+  font-family: 'Roboto';
+  font-weight: bold;
+  color: #4f46e5;
+  font-size: 20px;
+}
+
+.user-role {
+  font-family: 'Roboto';
+  color: #2c364c;
+  font-size: 12px;
+}
+
+.profile-failure-container {
+}
+
+.profile-failure-view-retry-button {
+  outline: none;
+  border-width: 0px;
+  background-color: #6366f1;
+  color: white;
+  font-family: 'Roboto';
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 2%;
+  padding-right: 2%;
+  font-weight: bold;
+  font-size: 12px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.loader-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.no-filter-match-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.no-filter-match-image {
+}
+
+.no-filter-match-heading {
+  font-family: 'Roboto';
+  font-weight: bold;
+  color: white;
+  font-size: 20px;
+}
+
+.no-filter-match-para {
+  font-family: 'Roboto';
+  color: white;
+  font-size: 11px;
+}
+

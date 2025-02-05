@@ -1,0 +1,168 @@
+.all-jobs-ul-list {
+  list-style-type: none;
+  padding-left: 0px;
+}
+
+.all-jobs-main-container {
+  display: flex;
+  flex-direction: row;
+  padding-left: 5%;
+  padding-right: 5%;
+  padding-top: 3%;
+  padding-bottom: 3%;
+}
+
+.only-all-jobs-container {
+}
+
+.search-input-and-icon {
+  border: 1px solid #7e858e;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 25vw;
+  border-radius: 2px;
+}
+
+.search-input-element {
+  outline: none;
+  background-color: transparent;
+  font-family: 'Roboto';
+  color: #7e858e;
+  border-radius: 3px;
+  border-width: 0px;
+  padding-left: 4%;
+  padding-top: 1%;
+  padding-bottom: 1%;
+  width: 100%;
+}
+
+.user-profile-and-filter-container {
+  width: 20%;
+  margin-right: 2%;
+}
+
+.jobs-display-container {
+  width: 80%;
+}
+
+.employment-type-ul-container {
+  list-style-type: none;
+  padding-left: 0px;
+}
+
+.each-employment-type-list {
+}
+
+.checkbox {
+  height: 11px;
+  width: 11px;
+}
+
+.employment-type-label {
+  color: white;
+  font-family: 'Roboto';
+  font-size: 11px;
+}
+
+.employment-type-heading {
+  color: white;
+  font-family: 'Roboto';
+  font-size: 15px;
+  font-weight: bold;
+  margin-top: 5%;
+}
+
+.salary-range-type-ul-container {
+  list-style-type: none;
+  padding-left: 0px;
+}
+
+.each-salary-range-type-list {
+}
+
+.radio {
+  height: 11px;
+  width: 11px;
+}
+
+.salary-range-type-label {
+  color: white;
+  font-family: 'Roboto';
+  font-size: 11px;
+}
+
+.salary-range-type-heading {
+  color: white;
+  font-family: 'Roboto';
+  font-size: 15px;
+  font-weight: bold;
+  margin-top: 5%;
+}
+
+.horizontal-line {
+  border: 1px solid #cbd5e1;
+  margin-top: 10%;
+}
+
+.search-icon {
+  font-size: 20px;
+}
+
+.search-button {
+  background-color: #272727;
+  color: #f1f5f9;
+  border-width: 0px;
+  padding-left: 4%;
+  padding-right: 4%;
+  padding-top: 1%;
+  padding-bottom: 1%;
+  cursor: pointer;
+}
+
+.failure-view-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 4%;
+}
+
+.failure-image {
+}
+
+.failure-view-heading {
+  color: white;
+  font-family: 'Roboto';
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.failure-view-para {
+  color: white;
+  font-family: 'Roboto';
+  font-size: 11px;
+}
+
+.failure-view-retry-button {
+  outline: none;
+  border-width: 0px;
+  background-color: #6366f1;
+  color: white;
+  font-family: 'Roboto';
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 2%;
+  padding-right: 2%;
+  font-weight: bold;
+  font-size: 12px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.loader-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}

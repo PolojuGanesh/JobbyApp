@@ -1,0 +1,103 @@
+.navbar-container {
+  background-color: #272727;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 1%;
+  padding-bottom: 1%;
+  padding-left: 5%;
+  padding-right: 5%;
+}
+
+.navbar-logo {
+  height: 35px;
+}
+
+.navbar-links-ul-container {
+  list-style-type: none;
+  padding-left: 0px;
+  display: flex;
+  flex-direction: row;
+}
+
+.navbar-home {
+  font-family: 'Roboto';
+  color: #cbd5e1;
+  font-size: 13px;
+  margin-right: 11px;
+}
+
+.navbar-jobs {
+  font-family: 'Roboto';
+  color: #cbd5e1;
+  font-size: 13px;
+  margin-left: 11px;
+}
+
+.logout-button {
+  outline: none;
+  border-width: 0px;
+  background-color: #6366f1;
+  color: white;
+  font-family: 'Roboto';
+  padding-top: 7px;
+  padding-bottom: 7px;
+  padding-left: 2%;
+  padding-right: 2%;
+  font-weight: bold;
+  font-size: 12px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.link-to-list-element {
+  text-decoration: none;
+}
+
+.header-website-logo {
+  text-decoration: none;
+}
+
+/* .mobile-view-container {
+  display: none;
+}
+
+@media screen and (max-width: 767px) {
+  .navbar-links-ul-container {
+    display: none;
+  }
+
+  .logout-button {
+    display: none;
+  }
+
+  .mobile-view-container {
+    display: block;
+  }
+
+  .mobile-ul-nav-items-container {
+    display: flex;
+    list-style-type: none;
+    padding-left: 0px;
+    align-items: center;
+  }
+
+  .each-mobile-nav-list {
+    margin-left: 10px;
+  }
+
+  .each-nav-list-button {
+    background-color: transparent;
+    border-width: 0px;
+  }
+
+  .each-nav-icon {
+    color: #ffffff;
+    font-size: 20px;
+  }
+
+  .navbar-logo {
+    height: 25px;
+  }
+} */

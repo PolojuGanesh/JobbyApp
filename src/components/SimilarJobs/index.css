@@ -1,0 +1,110 @@
+.similar-job-list-item {
+  background-color: #272727;
+  width: 30%;
+  margin-right: 2%;
+  margin-top: 1%;
+  border-radius: 9px;
+  padding-left: 2%;
+  padding-right: 2%;
+  padding-top: 2%;
+  padding-bottom: 2%;
+}
+
+.similar-companylogo-title-rating-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.similar-companylogo-container {
+  margin-right: 1%;
+}
+
+.similar-company-logo {
+  height: 53px;
+}
+
+.similar-title-rating-container {
+  margin-left: 2%;
+}
+
+.similar-job-title {
+  font-family: 'Roboto';
+  font-weight: bold;
+  font-size: 17px;
+  color: white;
+  margin-bottom: 8px;
+}
+
+.similar-star-rating-container {
+}
+
+.similar-company-rating {
+  font-family: 'Roboto';
+  font-weight: bold;
+  font-size: 15px;
+  color: white;
+  margin-top: 8px;
+}
+
+.similar-location-employmenttype-salary-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.similar-location-employmenttype-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.similar-location-icon-container {
+  margin-right: 10px;
+}
+
+.similar-job-location {
+  font-family: 'Roboto';
+  font-size: 12px;
+  color: white;
+}
+
+.similar-employmenttype-icon-container {
+  margin-left: 10px;
+}
+
+.similar-employment-type {
+  font-family: 'Roboto';
+  font-size: 12px;
+  color: white;
+}
+
+.similar-salary-container {
+}
+
+.similar-job-salary {
+  font-family: 'Roboto';
+  font-size: 17px;
+  color: white;
+}
+
+.line {
+  border: 1px solid #7e858e;
+}
+
+.similar-description-container {
+}
+
+.similar-job-description-heading {
+  font-family: 'Roboto';
+  font-weight: bold;
+  font-size: 15px;
+  color: white;
+}
+
+.similar-job-description {
+  font-family: 'Roboto';
+  font-size: 13px;
+  color: white;
+}
