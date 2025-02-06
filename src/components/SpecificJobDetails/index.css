@@ -24,6 +24,17 @@
 .specific-title-rating-container {
 }
 
+@media screen and (max-width: 767px) {
+  .specific-selected-job-container {
+    margin-top: 4%;
+    margin-bottom: 4%;
+  }
+
+  .specific-title-rating-container {
+    margin-left: 1%;
+  }
+}
+
 .specific-job-title {
   font-family: 'Roboto';
   font-weight: bold;
@@ -41,6 +52,23 @@
   font-size: 17px;
   color: white;
   margin-top: 8px;
+}
+
+@media screen and (max-width: 767px) {
+  .specific-company-logo {
+    height: 35px;
+    width: 35px;
+  }
+
+  .specific-job-title {
+    font-size: 14px;
+    margin-bottom: 0px;
+  }
+
+  .specific-company-rating {
+    font-size: 13px;
+    margin-top: 0px;
+  }
 }
 
 .specific-location-employmenttype-salary-container {
@@ -85,6 +113,20 @@
   color: white;
 }
 
+@media screen and (max-width: 767px) {
+  .specific-job-location {
+    font-size: 10px;
+  }
+
+  .specific-employment-type {
+    font-size: 10px;
+  }
+
+  .specific-job-salary {
+    font-size: 14px;
+  }
+}
+
 .line {
   border: 1px solid #7e858e;
 }
@@ -103,6 +145,16 @@
   font-family: 'Roboto';
   font-size: 13px;
   color: white;
+}
+
+@media screen and (max-width: 767px) {
+  .specific-job-description-heading {
+    font-size: 14px;
+  }
+
+  .specific-job-description {
+    font-size: 11px;
+  }
 }
 
 .skill-ul-container {
@@ -139,9 +191,26 @@
   color: white;
 }
 
+@media screen and (max-width: 767px) {
+  .life-at-company-container {
+    display: flex;
+    flex-direction: column;
+  }
+  .life-at-company-description {
+    font-size: 11px;
+  }
+}
+
 .life-at-company-image {
-  margin-left: 2%;
+  /* margin-left: 2%; */
   border-radius: 10px;
+}
+
+@media screen and (max-width: 767px) {
+  .life-at-company-image {
+    margin-top: 1%;
+    margin-bottom: 2%;
+  }
 }
 
 .skills-heading {
@@ -150,6 +219,20 @@
   font-size: 19px;
   color: white;
   margin-top: 3%;
+}
+
+@media screen and (max-width: 767px) {
+  .skills-heading {
+    font-size: 14px;
+  }
+
+  .similar-jobs-heading {
+    font-size: 17px;
+  }
+
+  .similar-jobs-ul-container {
+    flex-direction: column;
+  }
 }
 
 .description-and-website-url-container {
@@ -165,4 +248,10 @@
   font-weight: 500;
   font-size: 15px;
   color: #4f46e5;
+}
+
+@media screen and (max-width: 767px) {
+  .wesite-url {
+    font-size: 13px;
+  }
 }

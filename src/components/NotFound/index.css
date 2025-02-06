@@ -16,10 +16,18 @@
   font-size: 20px;
   font-weight: bold;
   color: white;
+  text-align: center;
 }
 
 .not-found-para {
   font-family: 'Roboto';
   font-size: 11px;
   color: white;
+  text-align: center;
+}
+
+@media screen and (max-width: 767px) {
+  .not-found-image {
+    width: 80%;
+  }
 }

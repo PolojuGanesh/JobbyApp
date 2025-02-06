@@ -9,6 +9,12 @@
   border-bottom-right-radius: 17px;
 }
 
+@media screen and (max-width: 767px) {
+  .user-profile-container {
+    margin-bottom: 4%;
+  }
+}
+
 .user-name {
   font-family: 'Roboto';
   font-weight: bold;
@@ -20,6 +26,20 @@
   font-family: 'Roboto';
   color: #2c364c;
   font-size: 12px;
+}
+
+@media screen and (max-width: 767px) {
+  .user-name {
+    font-size: 17px;
+  }
+
+  .user-role {
+    font-size: 10px;
+  }
+
+  .profile-image {
+    height: 70px;
+  }
 }
 
 .profile-failure-container {
@@ -69,4 +89,3 @@
   color: white;
   font-size: 11px;
 }
-

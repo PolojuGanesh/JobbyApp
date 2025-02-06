@@ -36,13 +36,27 @@ const Header = props => {
       <div className="mobile-view-container">
         <ul className="mobile-ul-nav-items-container">
           <li className="each-mobile-nav-list">
-            <AiFillHome className="each-nav-icon" />
+            <Link to="/">
+              <button aria-label="Home" className="each-nav-list-button">
+                <AiFillHome className="each-nav-icon" />
+              </button>
+            </Link>
           </li>
           <li className="each-mobile-nav-list">
-            <BsBriefcaseFill className="each-nav-icon" />
+            <Link to="/jobs">
+              <button aria-label="Jobs" className="each-nav-list-button">
+                <BsBriefcaseFill className="each-nav-icon" />
+              </button>
+            </Link>
           </li>
           <li className="each-mobile-nav-list">
-            <FiLogOut className="each-nav-icon" />
+            <button
+              onClick={onClickLogout}
+              aria-label="Logout"
+              className="each-nav-list-button"
+            >
+              <FiLogOut className="each-nav-icon" />
+            </button>
           </li>
         </ul>
       </div>
@@ -51,31 +65,3 @@ const Header = props => {
 }
 
 export default withRouter(Header)
-
-// <div className="mobile-view-container">
-//         <ul className="mobile-ul-nav-items-container">
-//           <li className="each-mobile-nav-list">
-//             <Link to="/">
-//               <button aria-label="Home" className="each-nav-list-button">
-//                 <AiFillHome className="each-nav-icon" />
-//               </button>
-//             </Link>
-//           </li>
-//           <li className="each-mobile-nav-list">
-//             <Link to="/jobs">
-//               <button aria-label="Jobs" className="each-nav-list-button">
-//                 <BsBriefcaseFill className="each-nav-icon" />
-//               </button>
-//             </Link>
-//           </li>
-//           <li className="each-mobile-nav-list">
-//             <button
-//               onClick={onClickLogout}
-//               aria-label="Logout"
-//               className="each-nav-list-button"
-//             >
-//               <FiLogOut className="each-nav-icon" />
-//             </button>
-//           </li>
-//         </ul>
-//       </div>

@@ -45,6 +45,14 @@ const salaryRangesList = [
   },
 ]
 
+const locationsList = [
+  {locationId: 'HYDERABAD', label: 'Hyderabad'},
+  {locationId: 'BANGALORE', label: 'Bangalore'},
+  {locationId: 'CHENNAI', label: 'Chennai'},
+  {locationId: 'DELHI', label: 'Delhi'},
+  {locationId: 'MUMBAI', label: 'Mumbai'},
+]
+
 const constants = {
   success: 'SUCCESS',
   failure: 'FAILURE',
@@ -56,9 +64,9 @@ class AllJobsSection extends Component {
     jobsList: [],
     selectedJobType: [],
     selectedSalaryType: [],
+    selectedLocation: [],
     userSearchInput: '',
     apiStatus: '',
-    showNoMatch: false,
   }
 
   componentDidMount() {
@@ -72,18 +80,30 @@ class AllJobsSection extends Component {
   getJobs = async () => {
     this.setState({apiStatus: constants.inProgress})
     const jwtToken = Cookies.get('jwt_token')
-    const {selectedJobType, selectedSalaryType, userSearchInput} = this.state
+    const {
+      selectedJobType,
+      selectedSalaryType,
+      selectedLocation,
+      userSearchInput,
+    } = this.state
 
     const employmentTypes = selectedJobType.join(',')
     const salaryRanges = selectedSalaryType.join(',')
 
-    const url = `https://apis.ccbp.in/jobs?employment_type=${employmentTypes}&minimum_package=${salaryRanges}&search=${userSearchInput}`
+    let url = `https://apis.ccbp.in/jobs?employment_type=${employmentTypes}&minimum_package=${salaryRanges}&search=${userSearchInput}`
+
+    // Append each selected location as a separate query parameter
+    selectedLocation.forEach(location => {
+      url += `&location=${location}`
+    })
+
     const options = {
       method: 'GET',
       headers: {
         Authorization: `Bearer ${jwtToken}`,
       },
     }
+
     const response = await fetch(url, options)
     if (response.ok) {
       const data = await response.json()
@@ -134,18 +154,35 @@ class AllJobsSection extends Component {
     }, this.getJobs)
   }
 
+  changeLocationType = dataReceived => {
+    this.setState(prevState => {
+      const {selectedLocation} = prevState
+      const index = selectedLocation.indexOf(dataReceived)
+
+      if (index === -1) {
+        return {selectedLocation: [...selectedLocation, dataReceived]}
+      }
+      return {
+        selectedLocation: selectedLocation.filter(
+          type => type !== dataReceived,
+        ),
+      }
+    }, this.getJobs)
+  }
+
   renderEmploymentType = () => {
-    const {selectedJobType} = this.state // Destructure state
+    const {selectedJobType} = this.state
+
     return employmentTypesList.map(eachType => {
-      const onSelectingEmploymentType = () =>
+      const onSelectingEmploymentType = () => {
         this.changeEmploymentType(eachType.employmentTypeId)
+      }
 
       const isChecked = selectedJobType.includes(eachType.employmentTypeId)
 
       return (
         <li
           key={eachType.employmentTypeId}
-          onClick={onSelectingEmploymentType}
           className="each-employment-type-list"
         >
           <input
@@ -153,7 +190,7 @@ class AllJobsSection extends Component {
             className="checkbox"
             type="checkbox"
             checked={isChecked}
-            onChange={() => {}} // To avoid warning about controlled components
+            onChange={onSelectingEmploymentType}
           />
           <label
             htmlFor={eachType.employmentTypeId}
@@ -167,29 +204,60 @@ class AllJobsSection extends Component {
   }
 
   renderSalaryRangeType = () => {
-    const {selectedSalaryType} = this.state // Destructure state
+    const {selectedSalaryType} = this.state
+
     return salaryRangesList.map(eachType => {
-      const onSelectingSalaryType = () =>
+      const onSelectingSalaryType = () => {
         this.changeSalaryType(eachType.salaryRangeId)
+      }
 
       const isChecked = selectedSalaryType.includes(eachType.salaryRangeId)
 
       return (
         <li
           key={eachType.salaryRangeId}
-          onClick={onSelectingSalaryType}
           className="each-salary-range-type-list"
         >
           <input
             id={eachType.salaryRangeId}
             className="radio"
-            type="checkbox" // Changed to checkbox for multiple selections
+            type="radio"
             checked={isChecked}
-            onChange={() => {}} // To avoid warning about controlled components
+            onChange={onSelectingSalaryType}
           />
           <label
             htmlFor={eachType.salaryRangeId}
             className="salary-range-type-label"
+          >
+            {eachType.label}
+          </label>
+        </li>
+      )
+    })
+  }
+
+  renderLocationType = () => {
+    const {selectedLocation} = this.state
+
+    return locationsList.map(eachType => {
+      const onSelectingLocationType = () => {
+        this.changeLocationType(eachType.locationId)
+      }
+
+      const isChecked = selectedLocation.includes(eachType.locationId)
+
+      return (
+        <li key={eachType.locationId} className="each-employment-type-list">
+          <input
+            id={eachType.locationId}
+            className="checkbox"
+            type="checkbox"
+            checked={isChecked}
+            onChange={onSelectingLocationType}
+          />
+          <label
+            htmlFor={eachType.locationId}
+            className="employment-type-label"
           >
             {eachType.label}
           </label>
@@ -219,7 +287,11 @@ class AllJobsSection extends Component {
       <p className="failure-view-para">
         We cannot seem to find the page you are looking for
       </p>
-      <button onClick={this.onRetry} className="failure-view-retry-button">
+      <button
+        type="button"
+        onClick={this.onRetry}
+        className="failure-view-retry-button"
+      >
         Retry
       </button>
     </div>
@@ -281,6 +353,7 @@ class AllJobsSection extends Component {
           onKeyDown={this.onSearchByEnter}
         />
         <button
+          type="button"
           aria-label="Search"
           data-testid="searchButton"
           onClick={this.onGetSearchedList}
@@ -304,321 +377,66 @@ class AllJobsSection extends Component {
 
   render() {
     return (
-      <div className="all-jobs-main-container">
-        <div className="user-profile-and-filter-container">
+      <>
+        <div className="all-jobs-main-container">
+          <div className="user-profile-and-filter-container">
+            <UserProfile />
+            <hr className="horizontal-line" />
+            <div className="employment-type-main-container">
+              <h1 className="employment-type-heading">Type of Employment</h1>
+              <ul className="employment-type-ul-container">
+                {this.renderEmploymentType()}
+              </ul>
+            </div>
+            <hr className="horizontal-line" />
+            <div className="salary-range-type-main-container">
+              <h1 className="salary-range-type-heading">Salary Range</h1>
+              <ul className="salary-range-type-ul-container">
+                {this.renderSalaryRangeType()}
+              </ul>
+            </div>
+            <hr className="horizontal-line" />
+            <div className="employment-type-main-container">
+              <h1 className="employment-type-heading">Location</h1>
+              <ul className="employment-type-ul-container">
+                {this.renderLocationType()}
+              </ul>
+            </div>
+          </div>
+          <div className="jobs-display-container">
+            {this.renderSearchInput()}
+            {this.renderSwitchCases()}
+          </div>
+        </div>
+        <div className="jobs-container-mobile-view">
+          {this.renderSearchInput()}
           <UserProfile />
-          <hr className="horizontal-line" />
+          <hr />
           <div className="employment-type-main-container">
             <h1 className="employment-type-heading">Type of Employment</h1>
             <ul className="employment-type-ul-container">
               {this.renderEmploymentType()}
             </ul>
           </div>
-          <hr className="horizontal-line" />
+          <hr />
           <div className="salary-range-type-main-container">
             <h1 className="salary-range-type-heading">Salary Range</h1>
             <ul className="salary-range-type-ul-container">
               {this.renderSalaryRangeType()}
             </ul>
           </div>
-        </div>
-        <div className="jobs-display-container">
-          {this.renderSearchInput()}
+          <hr />
+          <div className="employment-type-main-container">
+            <h1 className="employment-type-heading">Location</h1>
+            <ul className="employment-type-ul-container">
+              {this.renderLocationType()}
+            </ul>
+          </div>
           {this.renderSwitchCases()}
         </div>
-      </div>
+      </>
     )
   }
 }
 
 export default AllJobsSection
-
-// import {Component} from 'react'
-// import Loader from 'react-loader-spinner'
-// import Cookies from 'js-cookie'
-// import {BsSearch} from 'react-icons/bs'
-// import EachJobCard from '../EachJobCard'
-// import UserProfile from '../UserProfile'
-
-// import './index.css'
-
-// const employmentTypesList = [
-//   {
-//     label: 'Full Time',
-//     employmentTypeId: 'FULLTIME',
-//   },
-//   {
-//     label: 'Part Time',
-//     employmentTypeId: 'PARTTIME',
-//   },
-//   {
-//     label: 'Freelance',
-//     employmentTypeId: 'FREELANCE',
-//   },
-//   {
-//     label: 'Internship',
-//     employmentTypeId: 'INTERNSHIP',
-//   },
-// ]
-
-// const salaryRangesList = [
-//   {
-//     salaryRangeId: '1000000',
-//     label: '10 LPA and above',
-//   },
-//   {
-//     salaryRangeId: '2000000',
-//     label: '20 LPA and above',
-//   },
-//   {
-//     salaryRangeId: '3000000',
-//     label: '30 LPA and above',
-//   },
-//   {
-//     salaryRangeId: '4000000',
-//     label: '40 LPA and above',
-//   },
-// ]
-
-// const constants = {
-//   success: 'SUCCESS',
-//   failure: 'FAILURE',
-//   inProgress: 'IN_PROGRESS',
-// }
-
-// class AllJobsSection extends Component {
-//   state = {
-//     jobsList: [],
-//     selectedJobType: '',
-//     selectedSalaryType: '',
-//     userSearchInput: '',
-//     apiStatus: '',
-//     showNoMatch: false,
-//   }
-
-//   componentDidMount() {
-//     this.getJobs()
-//   }
-
-//   getSearchInput = event => {
-//     this.setState({userSearchInput: event.target.value})
-//   }
-
-//   getJobs = async () => {
-//     this.setState({apiStatus: constants.inProgress})
-//     const jwtToken = Cookies.get('jwt_token')
-//     const {selectedJobType, selectedSalaryType, userSearchInput} = this.state
-//     const url = `https://apis.ccbp.in/jobs?employment_type=${selectedJobType}&minimum_package=${selectedSalaryType}&search=${userSearchInput}`
-//     const options = {
-//       method: 'GET',
-//       headers: {
-//         Authorization: `Bearer ${jwtToken}`,
-//       },
-//     }
-//     const response = await fetch(url, options)
-//     if (response.ok) {
-//       const data = await response.json()
-
-//       const updatedData = data.jobs.map(eachJob => ({
-//         companyLogoUrl: eachJob.company_logo_url,
-//         employmentType: eachJob.employment_type,
-//         id: eachJob.id,
-//         jobDescription: eachJob.job_description,
-//         location: eachJob.location,
-//         packagePerAnnum: eachJob.package_per_annum,
-//         rating: eachJob.rating,
-//         title: eachJob.title,
-//       }))
-//       this.setState({jobsList: updatedData, apiStatus: constants.success})
-//     } else {
-//       this.setState({apiStatus: constants.failure})
-//     }
-//   }
-
-//   onGetSearchedList = () => {
-//     this.getJobs()
-//   }
-
-//   onSearchByEnter = event => {
-//     if (event.key === 'Enter') {
-//       this.getJobs()
-//     }
-//   }
-
-//   renderSearchInput = () => {
-//     const {userSearchInput} = this.state
-//     return (
-//       <div className="search-input-and-icon">
-//         <input
-//           onChange={this.getSearchInput}
-//           value={userSearchInput}
-//           type="search"
-//           className="search-input-element"
-//           placeholder="Search"
-//           onKeyDown={this.onSearchByEnter}
-//         />
-//         <button
-//           aria-label="Search"
-//           data-testid="searchButton"
-//           onClick={this.onGetSearchedList}
-//           className="search-button"
-//         >
-//           <BsSearch className="search-icon" />
-//         </button>
-//       </div>
-//     )
-//   }
-
-//   renderAllJobs = () => {
-//     const {jobsList} = this.state
-//     return (
-//       <div className="only-all-jobs-container">
-//         <ul className="all-jobs-ul-list">
-//           {jobsList.map(each => (
-//             <EachJobCard each={each} key={each.id} />
-//           ))}
-//         </ul>
-//       </div>
-//     )
-//   }
-
-//   changeEmploymentType = dataReceived => {
-//     this.setState({selectedJobType: dataReceived}, this.getJobs)
-//   }
-
-//   renderEmploymentType = () =>
-//     employmentTypesList.map(eachType => {
-//       const onSelectingEmploymentType = () =>
-//         this.changeEmploymentType(eachType.employmentTypeId)
-//       return (
-//         <li
-//           key={eachType.employmentTypeId}
-//           onClick={onSelectingEmploymentType}
-//           className="each-employment-type-list"
-//         >
-//           <input
-//             id={eachType.employmentTypeId}
-//             className="checkbox"
-//             type="checkbox"
-//           />
-//           <label
-//             htmlFor={eachType.employmentTypeId}
-//             className="employment-type-label"
-//           >
-//             {eachType.label}
-//           </label>
-//         </li>
-//       )
-//     })
-
-//   changeSalaryType = dataReceived => {
-//     this.setState({selectedSalaryType: dataReceived}, this.getJobs)
-//   }
-
-//   renderSalaryRangeType = () =>
-//     salaryRangesList.map(eachType => {
-//       const onSelectingSalaryType = () =>
-//         this.changeSalaryType(eachType.salaryRangeId)
-//       return (
-//         <li
-//           key={eachType.salaryRangeId}
-//           onClick={onSelectingSalaryType}
-//           className="each-salary-range-type-list"
-//         >
-//           <input id={eachType.salaryRangeId} className="radio" type="radio" />
-//           <label
-//             htmlFor={eachType.salaryRangeId}
-//             className="salary-range-type-label"
-//           >
-//             {eachType.label}
-//           </label>
-//         </li>
-//       )
-//     })
-
-//   renderLoadingView = () => (
-//     <div className="loader-container" data-testid="loader">
-//       <Loader type="ThreeDots" color="#ffffff" height="50" width="50" />
-//     </div>
-//   )
-
-//   onRetry = () => {
-//     this.getJobs()
-//   }
-
-//   renderFailureView = () => (
-//     <div className="failure-view-container">
-//       <img
-//         className="failure-image"
-//         alt="failure view"
-//         src="https://assets.ccbp.in/frontend/react-js/failure-img.png"
-//       />
-//       <h1 className="failure-view-heading">Oops! Something Went Wrong</h1>
-//       <p className="failure-view-para">
-//         We cannot seem to find the page you are looking for
-//       </p>
-//       <button onClick={this.onRetry} className="failure-view-retry-button">
-//         Retry
-//       </button>
-//     </div>
-//   )
-
-//   renderNoFiltersMatch = () => (
-//     <div className="no-filter-match-container">
-//       <img
-//         className="no-filter-match-image"
-//         alt="no jobs"
-//         src="https://assets.ccbp.in/frontend/react-js/no-jobs-img.png"
-//       />
-//       <h1 className="no-filter-match-heading">No Jobs Found</h1>
-//       <p className="no-filter-match-para">
-//         We could not find any jobs. Try other filters
-//       </p>
-//     </div>
-//   )
-
-//   renderSwitchCases = () => {
-//     const {apiStatus} = this.state
-//     switch (apiStatus) {
-//       case constants.success:
-//         return this.renderAllJobs()
-//       case constants.failure:
-//         return this.renderFailureView()
-//       case constants.inProgress:
-//         return this.renderLoadingView()
-//       default:
-//         return null
-//     }
-//   }
-
-//   render() {
-//     const {showNoMatch} = this.state
-//     return (
-//       <div className="all-jobs-main-container">
-//         <div className="user-profile-and-filter-container">
-//           <UserProfile />
-//           <hr className="horizontal-line" />
-//           <div className="employment-type-main-container">
-//             <h1 className="employment-type-heading">Type of Employment</h1>
-//             <ul className="employment-type-ul-container">
-//               {this.renderEmploymentType()}
-//             </ul>
-//           </div>
-//           <hr className="horizontal-line" />
-//           <div className="salary-range-type-main-container">
-//             <h1 className="salary-range-type-heading">Salary Range</h1>
-//             <ul className="salary-range-type-ul-container">
-//               {this.renderSalaryRangeType()}
-//             </ul>
-//           </div>
-//         </div>
-//         <div className="jobs-display-container">
-//           {this.renderSearchInput()}
-//           {this.renderSwitchCases()}
-//         </div>
-//       </div>
-//     )
-//   }
-// }
-
-// export default AllJobsSection
